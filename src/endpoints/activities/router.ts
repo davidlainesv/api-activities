@@ -45,6 +45,8 @@ router.post('/', async (req, res) => {
  * @api {get} /activities?id={id} Obtiene una actividad por ?id={id}
  * @apiName GetActivity
  * @apiGroup Activity
+ * 
+ * @apiParam {Number} id Id de la actividad.
  *
  * @apiSuccess {String} description Descripción de la actividad.
  * @apiSuccess {String} date_time   Fecha de la actividad.
@@ -74,6 +76,8 @@ router.get('/', async (req, res) => {
  * @api {get} /activities/{id} Obtiene una actividad por /{id}
  * @apiName GetActivity2
  * @apiGroup Activity
+ * 
+ * @apiParam {Number} id Id de la actividad.
  *
  * @apiSuccess {String} description Descripción de la actividad.
  * @apiSuccess {String} date_time   Fecha de la actividad.
@@ -95,6 +99,8 @@ router.get('/:id', async (req, res) => {
  * @api {put} /activities/{id} Actualiza una actividad
  * @apiName UpdateActivity
  * @apiGroup Activity
+ * 
+ * @apiParam {Number} id Id de la actividad.
  * 
  * @apiBody {String}    [description]   Descripción de la actividad.
  * @apiBody {String}    [date_time]     Fecha de la actividad en formato yyyy/MM/dd HH:mm:ss.
@@ -134,6 +140,8 @@ router.put('/:id', async function (req, res) {
  * @apiName DeleteActivity
  * @apiGroup Activity
  * @apiDescription Este endpoint devuelve el Id de la actividad eliminada
+ * 
+ * @apiParam {Number} id Id de la actividad.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
