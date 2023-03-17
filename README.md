@@ -1,1 +1,1 @@
-# api-activities
+# API Activities
