@@ -1,12 +1,12 @@
 import express from 'express'
+import * as controller from './controller'
 
 const router = express.Router()
 
 // create item
 router.post('/', async (req, res) => {
     try {
-        // const result = await controller.insert_activity(pool, req.body)
-        const result = null
+        const result = await controller.insert_item(req.body)
         return res.status(201).json(result)
     } catch (error) {
         console.log("request", req)
@@ -22,40 +22,41 @@ router.post('/', async (req, res) => {
 // read items
 router.get('/', async (req, res) => {
     if (req.query.id) {
+        const item_id = +req.query.id
         try {
-            // const result = await controller.select_activity(pool, req.query.id)
-            const result = null
-            return res.json(result);
+            const result = await controller.select_item(item_id)
+            return res.json(result)
         } catch (error) {
             return res.status(404).json({ message: "No hemos encontrado la actividad." })
         }
     }
 
     try {
-        // const results = await controller.select_activities(pool)
-        const results = null
-        return res.json(results);
+        const results = await controller.select_items()
+        return res.json(results)
     } catch (error) {
         return res.status(500).json({ message: error })
     }
 })
 
 // read item
-router.get('/:id', async (_req, res) => {
+router.get('/:id', async (req, res) => {
+    const item_id = +req.params.id
+
     try {
-        // const result = await controller.select_activity(pool, req.params.id)
-        const result = null
+        const result = await controller.select_item(item_id)
         return res.json(result)
     } catch (error) {
         return res.status(404).json({ message: "No hemos encontrado la actividad." })
     }
-
 })
 
 // update item
-router.put('/:id', async function (_req, res) {
+router.put('/:id', async function (req, res) {
+    const item_id = +req.params.id
+
     try {
-        // const _ = await controller.select_activity(pool, req.params.id);
+        await controller.select_item(item_id);
     } catch (error) {
         return res.status(404).json({
             message: "No hemos encontrado la actividad.",
@@ -64,8 +65,7 @@ router.put('/:id', async function (_req, res) {
     }
 
     try {
-        // const results = await controller.update_activity(pool, req.params.id, req.body);
-        const results = null
+        const results = await controller.update_item(item_id, req.body);
         return res.json(results);
     } catch (error) {
         return res.status(500).json({
@@ -76,9 +76,11 @@ router.put('/:id', async function (_req, res) {
 })
 
 // delete item
-router.delete('/:id', async function (_req, res) {
+router.delete('/:id', async function (req, res) {
+    const item_id = +req.params.id
+
     try {
-        // const _ = await controller.select_activity(pool, req.params.id);
+        await controller.select_item(item_id);
     } catch (error) {
         return res.status(404).json({
             message: "No hemos encontrado la actividad.",
@@ -87,8 +89,7 @@ router.delete('/:id', async function (_req, res) {
     }
 
     try {
-        // const result = await controller.delete_activity(pool, req.params.id);
-        const result = null
+        const result = await controller.delete_item(item_id);
         return res.json({ id: result });
     } catch (error) {
         console.log(error);

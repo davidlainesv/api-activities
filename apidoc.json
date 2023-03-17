@@ -1,0 +1,7 @@
+{
+    "name": "REST API - Actividades",
+    "version": "1.0.0",
+    "description": "Documentación de la REST API para la aplicación de Actividades",
+    "title": "REST API - Actividades",
+    "url" : "/api"
+  }

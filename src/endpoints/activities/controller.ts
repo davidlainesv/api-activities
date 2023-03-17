@@ -16,7 +16,7 @@ export function cast_activities(items: any[]): HttpResponseActivity[] {
     })
 }
 
-export async function update_activity(activity_id: number, update: HttpRequestActivityUpdate) {
+export async function update_activity(activity_id: string, update: HttpRequestActivityUpdate) {
     const sql_update_entries = generate_sql_update_entries(schema, update)
     const sql = `
         UPDATE activities SET 
@@ -34,7 +34,7 @@ export async function update_activity(activity_id: number, update: HttpRequestAc
     }
 }
 
-export async function select_activity(activity_id: number) {
+export async function select_activity(activity_id: string) {
     const sql = `SELECT * FROM activities WHERE activity_id=${activity_id}`
     try {
         const results = await sendSql(sql)
@@ -77,7 +77,7 @@ export async function insert_activity(activity: HttpRequestActivity) {
     }
 }
 
-export async function delete_activity(activity_id: number) {
+export async function delete_activity(activity_id: string) {
     var sql = `
         DELETE FROM activities WHERE activity_id = ${activity_id}
     `;

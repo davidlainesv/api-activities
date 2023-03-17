@@ -14,7 +14,7 @@ app.get("/ping", (_req, res) => {
     res.send("pong")
 })
 
-app.use("/api/activites", activities)
+app.use("/api/activities", activities)
 app.use("/api/students", students)
 
 app.listen(PORT, () => {
