@@ -51,7 +51,7 @@ export async function select_activities() {
     const sql = "SELECT * FROM activities"
     try {
         const results = await sendSql(sql)
-        return cast_activity(results[0])
+        return cast_activities(results)
     } catch (error) {
         return {
             "message": "Error de servidor",
