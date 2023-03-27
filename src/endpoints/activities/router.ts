@@ -31,10 +31,12 @@ router.post('/', async (req, res) => {
 })
 
 /**
- * @api {get} /activities Obtiene la lista entera de actividades
+ * @api {get} /activities Obtiene la lista entera de actividades o la actividad solicitada por el query ?id.
  * @apiName GetActivities
  * @apiGroup Activity
- * @apiDescription La tabla debajo describe los campos por cada elemento dentro de la lista.
+ * @apiDescription La tabla debajo describe los campos por cada elemento devuelto.
+ * 
+ * @apiQuery {Number} id Id de la actividad
  *
  * @apiSuccess {Number}     activities.activity_id  Id de la actividad.
  * @apiSuccess {String}     activities.description  Descripción de la actividad.
@@ -42,20 +44,6 @@ router.post('/', async (req, res) => {
  * @apiSuccess {String}     activities.category     Categoría de la actividad.
  * @apiSuccess {Boolean}    activities.priority    Actividad es prioritaria.
  * @apiSuccess {String}     activities.student_id   Matrícula del estudiante.
- */
-/**
- * @api {get} /activities?id={id} Obtiene una actividad por ?id={id}
- * @apiName GetActivity
- * @apiGroup Activity
- * 
- * @apiParam {Number} id Id de la actividad.
- *
- * @apiSuccess {Number}     activity_id     Id de la actividad.
- * @apiSuccess {String}     description     Descripción de la actividad.
- * @apiSuccess {String}     date_time       Fecha de la actividad.
- * @apiSuccess {String}     category        Categoría de la actividad.
- * @apiSuccess {Boolean}    priority        Actividad es prioritaria.
- * @apiSuccess {String}     student_id      Matrícula del estudiante.
  */
 router.get('/', async (req, res) => {
     if (req.query.id) {
@@ -76,7 +64,7 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * @api {get} /activities/{id} Obtiene una actividad por /{id}
+ * @api {get} /activities/:id Obtiene una actividad por /:id
  * @apiName GetActivity2
  * @apiGroup Activity
  * 
@@ -100,7 +88,7 @@ router.get('/:id', async (req, res) => {
 })
 
 /**
- * @api {put} /activities/{id} Actualiza una actividad
+ * @api {put} /activities/:id Actualiza una actividad
  * @apiName UpdateActivity
  * @apiGroup Activity
  * 
@@ -141,7 +129,7 @@ router.put('/:id', async function (req, res) {
 })
 
 /**
- * @api {delete} /activities/{id} Elimina una actividad
+ * @api {delete} /activities/:id Elimina una actividad
  * @apiName DeleteActivity
  * @apiGroup Activity
  * @apiDescription Este endpoint devuelve el Id de la actividad eliminada

@@ -8,7 +8,7 @@ const router = express.Router()
  * @apiName CreateStudent
  * @apiGroup Student
  *
- * @apiSuccess (201) {String} student_id    Id del estudiante.
+ * @apiSuccess (201) {String} student_id    Matrícula del estudiante
  * @apiSuccess (201) {String} name          Nombre del estudiante.
  * @apiSuccess (201) {Boolean} active       El estudiante está activo o no.
  * @apiSuccess (201) {String} email         Email del estudiante.
@@ -30,29 +30,18 @@ router.post('/', async (req, res) => {
 })
 
 /**
- * @api {get} /students Obtiene la lista entera de estudiantes
+ * @api {get} /students Obtiene la lista entera de estudiantes o el estudiante solicitado por el query ?id.
  * @apiName GetStudents
  * @apiGroup Student
- * @apiDescription La tabla debajo describe los campos por cada elemento dentro de la lista.
+ * @apiDescription La tabla debajo describe los campos por cada elemento devuelto.
  *
- * @apiSuccess {String}     students.student_id     Id del estudiante.
+ * @apiQuery {String} id    Matrícula del estudiante
+ * 
+ * @apiSuccess {String}     students.student_id     Matrícula del estudiante
  * @apiSuccess {String}     students.name           Nombre del estudiante.
  * @apiSuccess {Boolean}    students.active         El estudiante está activo o no.
  * @apiSuccess {String}     students.email          Email del estudiante.
  * @apiSuccess {String}     students.notes          Notas sobre el estudiante.
- */
-/**
- * @api {get} /students?id={id} Obtiene un estudiante por ?id={id}
- * @apiName GetStudent
- * @apiGroup Student
- * 
- * @apiParam {Number} id Id del estudiante.
- *
- * @apiSuccess {String} student_id    Id del estudiante.
- * @apiSuccess {String} name          Nombre del estudiante.
- * @apiSuccess {Boolean} active       El estudiante está activo o no.
- * @apiSuccess {String} email         Email del estudiante.
- * @apiSuccess {String} notes         Notas sobre el estudiante.
  */
 router.get('/', async (req, res) => {
     if (req.query.id) {
@@ -74,13 +63,13 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * @api {get} /students/{id} Obtiene un estudiante por /{id}
+ * @api {get} /students/:id Obtiene un estudiante por /:id
  * @apiName GetStudent2
  * @apiGroup Student
  * 
- * @apiParam {Number} id Id del estudiante.
+ * @apiParam {Number} id Matrícula del estudiante
  *
- * @apiSuccess {String} student_id    Id del estudiante.
+ * @apiSuccess {String} student_id    Matrícula del estudiante
  * @apiSuccess {String} name          Nombre del estudiante.
  * @apiSuccess {Boolean} active       Estudiante está activo o no.
  * @apiSuccess {String} email         Email del estudiante.
@@ -98,11 +87,11 @@ router.get('/:id', async (req, res) => {
 })
 
 /**
- * @api {put} /students/{id} Actualiza un estudiante
+ * @api {put} /students/:id Actualiza un estudiante
  * @apiName UpdateStudent
  * @apiGroup Student
  * 
- * @apiParam {Number} id Id del estudiante.
+ * @apiParam {Number} id Matrícula del estudiante
  * 
  * @apiBody {String}    [name]          Nombre del estudiante.
  * @apiBody {Boolean}   [active]        Estudiante está activo o no.
@@ -138,12 +127,12 @@ router.put('/:id', async function (req, res) {
 })
 
 /**
- * @api {delete} /students/{id} Elimina un estudiante
+ * @api {delete} /students/:id Elimina un estudiante
  * @apiName DeleteStudent
  * @apiGroup Student
  * @apiDescription Este endpoint devuelve el Id del estudiante eliminado
  * 
- * @apiParam {Number} id Id del estudiante.
+ * @apiParam {Number} id Matrícula del estudiante
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK

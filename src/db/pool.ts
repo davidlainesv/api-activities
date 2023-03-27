@@ -1,4 +1,4 @@
-import mysql, { PoolConnection } from "mysql"
+import mysql from "mysql"
 
 /**
  * Configuración de conexión múltiple a la base de datos

@@ -15,7 +15,7 @@ export function format_datetime(date: Date): string {
 
 /**
  * 
- * @param schema objeto {"nombre_propiedad": "tipo_de_dato", ...} con la estructura que define al parámetro values
+ * @param schema objeto \{"nombre_propiedad": "tipo_de_dato", ...\} con la estructura que define al parámetro values
  * @param values comando de SQL con las entradas de actualización para cada propiedad del parámetro values
  * @returns 
  */
@@ -39,17 +39,12 @@ export function generate_sql_update_entries(schema: any, values: any): string {
 }
 
 /**
- * Tipo de dato que puede ser HttpResponseStudent o HttpResponseActivity
- */
-type HttpResponseItemType = HttpResponseStudent | HttpResponseActivity
-
-/**
  * Convierte un objeto SQL a un objeto HttpResponseStudent o HttpResponseActivity
  * @param schema objeto que describe los tipos de datos de las propiedades del objeto SQL
  * @param item objeto devuelto por una operación SQL
  * @returns objeto de tipo HttpResponseStudent o HttpResponseActivity
  */
-export function cast_item<Type extends HttpResponseItemType>(schema: any, item: any): Type {
+export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivity)>(schema: any, item: any): Type {
     var casted = {} as any
     for (const prop in item) {
         if (schema[prop] === "string") {
@@ -70,7 +65,7 @@ export function cast_item<Type extends HttpResponseItemType>(schema: any, item: 
  * @param item lista de objetos devuelto por una operación SQL
  * @returns lista de objetos de tipo HttpResponseStudent o HttpResponseActivity
  */
-export function cast_items<Type extends HttpResponseItemType>(schema: any, items: any[]): Type[] {
+export function cast_items<Type extends (HttpResponseStudent | HttpResponseActivity)>(schema: any, items: any[]): Type[] {
     return items.map(item => {
         return cast_item<Type>(schema, item)
     })

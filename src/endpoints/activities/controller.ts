@@ -18,6 +18,18 @@ import { HttpResponseActivity } from "./model"
 // }
 
 /**
+ * Code blocks are great for examples
+ *
+ * ```ts
+ * // run typedoc --help for a list of supported languages
+ * const instance = new MyClass();
+ * ```
+ */
+export function test() {
+    return 2
+}
+
+/**
  * Actualiza una actividad en la base de datos
  * @param activity_id string con el id de la actividad
  * @param update objeto que agrupa las propiedades que se van a actualizar
