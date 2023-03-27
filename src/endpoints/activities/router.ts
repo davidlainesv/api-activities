@@ -1,5 +1,6 @@
 import express from 'express'
 import * as controller from './controller'
+import { HttpResponseActivity } from './model'
 
 const router = express.Router()
 
@@ -23,8 +24,17 @@ const router = express.Router()
  */
 router.post('/', async (req, res) => {
     try {
-        const result = await controller.insert_activity(req.body)
-        return res.status(201).json(result)
+        // 1. obetener el cuerpo de la llamada que recibió
+        const body = req.body
+
+        // 2. insertar el body que recibió en la base de datos
+        const createdActivity: HttpResponseActivity = await controller.insert_activity(body)
+
+        // [opcional] 3. trabajar con el objeto que representa la actividad creada
+        // createdActivity.date_time.setSeconds(100)
+
+        // 4. convertir el objeto a JSON y devolverlo como un HTTP Response de código 201
+        return res.status(201).json(createdActivity)
     } catch (error) {
         console.log("request", req)
         console.log("request body", req.body)
@@ -84,11 +94,21 @@ router.get('/', async (req, res) => {
  * @apiSuccess {String}     student_id      Matrícula del estudiante.
  */
 router.get('/:id', async (req, res) => {
+    // ej. HTTP GET a "/activities/20"
     try {
-        const result = await controller.select_activity(req.params.id as string)
-        return res.json(result)
+        // 1. obtener el id que el cliente me mandó a través de la consulta
+        const requestedId = req.params.id as string
+
+        // 2. consultar la actividad con ese id en la base de datos
+        const activitySelected = await controller.select_activity(requestedId)
+
+        // 3. devolver la actividad en formato JSON con código 200 (default)
+        return res.json(activitySelected)
     } catch (error) {
-        return res.status(404).json({ message: "No hemos encontrado la actividad." })
+        return res.status(404).json({
+            message: "No hemos encontrado la actividad.",
+            server_error: String(error)
+        })
     }
 
 })
