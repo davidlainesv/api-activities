@@ -1,5 +1,8 @@
 import mysql from "mysql"
 
+/**
+ * Configuración de conexión a la base de datos
+ */
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -8,6 +11,9 @@ const con = mysql.createConnection({
 });
 
 
+/**
+ * Comando SQL para crear la tabla de Actividades
+ */
 const CREATE_TABLE_ACTIVITIES_SQL = `
   CREATE TABLE activities (
     activity_id int NOT NULL AUTO_INCREMENT,
@@ -20,6 +26,9 @@ const CREATE_TABLE_ACTIVITIES_SQL = `
   )
 `
 
+/**
+ * Comando SQL para crear la tabla de Estudiantes
+ */
 const CREATE_TABLE_STUDENTS_SQL = `
   CREATE TABLE students (
     student_id varchar(25) NOT NULL,
@@ -31,7 +40,9 @@ const CREATE_TABLE_STUDENTS_SQL = `
   )
 `
 
-
+/**
+ * Función para crear las tablas de Actividades y Estudiantes
+ */
 con.connect((err) => {
     if (err) throw err
     console.log("Connected!")

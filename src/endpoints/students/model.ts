@@ -1,3 +1,6 @@
+/**
+ * Tipos de dato de las columnas de la tabla de Estudiantes dentro de la base de datos
+ */
 export const schema = {
     "name": "string",
     "active": "boolean",
@@ -5,13 +8,20 @@ export const schema = {
     "notes": "string"
 }
 
+/**
+ * Estructura de un estudiante devuelto por la API
+ */
 export interface HttpResponseStudent {
+    student_id: string
     name: string
     active: boolean
     email: string
     notes: string
 }
 
+/**
+ * Estructura de un estudiante recibido en la API
+ */
 export interface HttpRequestStudentCreateJson {
     name: string
     active: string
@@ -19,6 +29,9 @@ export interface HttpRequestStudentCreateJson {
     notes: string
 }
 
+/**
+ * Estructura de un objeto de actualización de estudiante recibido en la API
+ */
 export interface HttpRequestStudentUpdateJson {
     id?: number
     name?: string

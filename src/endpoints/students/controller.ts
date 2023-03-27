@@ -1,20 +1,20 @@
-import { generate_sql_update_entries } from "../../common/utils"
+import { cast_item, cast_items, generate_sql_update_entries } from "../../common/utils"
 import { sendSql } from "../../db/pool"
 import { HttpRequestStudentCreateJson, HttpRequestStudentUpdateJson, schema } from "./model"
 import { HttpResponseStudent } from "./model"
 
-export function cast_item(item: any): HttpResponseStudent {
-    return {
-        ...item,
-        active: Boolean(item.active)
-    }
-}
+// export function cast_item(item: any): HttpResponseStudent {
+//     return {
+//         ...item,
+//         active: Boolean(item.active)
+//     }
+// }
 
-export function cast_items(items: any[]): HttpResponseStudent[] {
-    return items.map(item => {
-        return cast_item(item)
-    })
-}
+// export function cast_items(items: any[]): HttpResponseStudent[] {
+//     return items.map(item => {
+//         return cast_item(item)
+//     })
+// }
 
 export async function update_item(student_id: number, update: HttpRequestStudentUpdateJson) {
     const sql_update_entries = generate_sql_update_entries(schema, update)
@@ -25,7 +25,7 @@ export async function update_item(student_id: number, update: HttpRequestStudent
     `
     try {
         const result = await sendSql(sql)
-        return cast_item(result)
+        return cast_item<HttpResponseStudent>(schema, result)
     } catch (error) {
         return {
             "message": "Error de servidor",
@@ -38,7 +38,7 @@ export async function select_item(student_id: number) {
     const sql = `SELECT * FROM students WHERE student_id=${student_id}`
     try {
         const results = await sendSql(sql)
-        return cast_item(results[0])
+        return cast_item<HttpResponseStudent>(schema, results[0])
     } catch (error) {
         return {
             "message": "Error de servidor",
@@ -51,7 +51,7 @@ export async function select_items() {
     const sql = "SELECT * FROM students"
     try {
         const results = await sendSql(sql)
-        return cast_item(results[0])
+        return cast_items<HttpResponseStudent>(schema, results)
     } catch (error) {
         return {
             "message": "Error de servidor",
@@ -67,8 +67,8 @@ export async function insert_item(student: HttpRequestStudentCreateJson) {
         VALUES ('${student.name}', ${active_bit}, '${student.email}', '${student.notes}')
     `;
     try {
-        const results = await sendSql(sql)
-        return cast_item(results)
+        const result = await sendSql(sql)
+        return cast_item<HttpResponseStudent>(schema, result)
     } catch (error) {
         return {
             "message": "Error de servidor",
