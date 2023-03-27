@@ -8,6 +8,12 @@ const router = express.Router()
  * @apiName CreateActivity
  * @apiGroup Activity
  *
+ * @apiBody {String}    description   Descripción de la actividad.
+ * @apiBody {String}    date_time     Fecha de la actividad en formato yyyy/MM/dd HH:mm:ss.
+ * @apiBody {String}    category      Categoría de la actividad.
+ * @apiBody {Boolean}   priority      Actividad es prioritaria.
+ * @apiBody {String}    student_id    Matrícula del estudiante.
+ * 
  * @apiSuccess (201) {Number} activity_id Id de la actividad.
  * @apiSuccess (201) {String} description Descripción de la actividad.
  * @apiSuccess (201) {String} date_time   Fecha de la actividad.
