@@ -24,7 +24,7 @@ const router = express.Router()
  */
 router.post('/', async (req, res) => {
     try {
-        // 1. obetener el cuerpo de la llamada que recibió
+        // 1. obtener el cuerpo de la llamada que recibió
         const body = req.body
 
         // 2. insertar el body que recibió en la base de datos
