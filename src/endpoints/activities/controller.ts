@@ -31,6 +31,7 @@ export async function update_activity(activity_id: string, update: HttpRequestAc
  */
 export async function select_activity(activity_id: string): Promise<HttpResponseActivity> {
     const sql = `SELECT * FROM activities WHERE activity_id=${activity_id}`
+    console.log(sql)
     try {
         const results = await sendSql(sql)
         return cast_item<HttpResponseActivity>(schema, results[0])
