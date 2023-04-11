@@ -3,32 +3,6 @@ import { sendSql } from "../../db/pool"
 import { HttpRequestActivity, HttpRequestActivityUpdate, schema } from "./model"
 import { HttpResponseActivity } from "./model"
 
-// export function cast_item(item: any): HttpResponseActivity {
-
-//     return {
-//         ...item,
-//         priority: Boolean(item.priority)
-//     }
-// }
-
-// export function cast_items(items: any[]): HttpResponseActivity[] {
-//     return items.map(item => {
-//         return cast_item(item)
-//     })
-// }
-
-/**
- * Code blocks are great for examples
- *
- * ```ts
- * // run typedoc --help for a list of supported languages
- * const instance = new MyClass();
- * ```
- */
-export function test() {
-    return 2
-}
-
 /**
  * Actualiza una actividad en la base de datos
  * @param activity_id string con el id de la actividad

@@ -11,7 +11,7 @@ app.use(express.json())
 
 // define un endpoint /ping de prueba
 app.get("/ping", (_req, res) => {
-    console.log("someone pinged here!!")
+    console.log("someone pinged here!")
     res.send("pong")
 })
 

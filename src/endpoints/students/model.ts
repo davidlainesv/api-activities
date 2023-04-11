@@ -5,7 +5,10 @@ export const schema = {
     "name": "string",
     "active": "boolean",
     "email": "string",
-    "notes": "string"
+    "notes": "string",
+    "picture": "image",
+    "picture_name": "string",
+    "picture_type": "string"
 }
 
 /**
@@ -17,12 +20,16 @@ export interface HttpResponseStudent {
     active: boolean
     email: string
     notes: string
+    picture: string
+    picture_name: string
+    picture_type: string
 }
 
 /**
  * Estructura de un estudiante recibido en la API
  */
 export interface HttpRequestStudentCreateJson {
+    student_id: string
     name: string
     active: string
     email: string

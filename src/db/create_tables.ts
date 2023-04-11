@@ -4,10 +4,10 @@ import mysql from "mysql"
  * Configuración de conexión a la base de datos
  */
 const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "4321",
-    database: "app"
+  host: "localhost",
+  user: "root",
+  password: "4321",
+  database: "app"
 });
 
 
@@ -36,6 +36,9 @@ const CREATE_TABLE_STUDENTS_SQL = `
     active bit NOT NULL,
     email varchar(25) NOT NULL,
     notes varchar(255),
+    picture_name varchar(255) NULL,
+    picture_type varchar(255) NULL,
+    picture LONGBLOB NULL,
     PRIMARY KEY (student_id)
   )
 `
@@ -44,18 +47,18 @@ const CREATE_TABLE_STUDENTS_SQL = `
  * Función para crear las tablas de Actividades y Estudiantes
  */
 con.connect((err) => {
+  if (err) throw err
+  console.log("Connected to database.")
+
+  // Create table 'activities'
+  con.query(CREATE_TABLE_ACTIVITIES_SQL, (err, _result) => {
     if (err) throw err
-    console.log("Connected!")
+    console.log("Table 'activities' created.")
+  })
 
-    // Create table 'activities'
-    con.query(CREATE_TABLE_ACTIVITIES_SQL, (err, _result) => {
-        if (err) throw err
-        console.log("Table 'activities' created")
-    })
-
-    // Create table 'students'
-    con.query(CREATE_TABLE_STUDENTS_SQL, (err, _result) => {
-        if (err) throw err
-        console.log("Table 'students' created")
-    })
+  // Create table 'students'
+  con.query(CREATE_TABLE_STUDENTS_SQL, (err, _result) => {
+    if (err) throw err
+    console.log("Table 'students' created.")
+  })
 })

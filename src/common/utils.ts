@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { HttpResponseActivity } from "../endpoints/activities/model"
 import { HttpResponseStudent } from "../endpoints/students/model"
+import { readFile } from 'fs';
 
 /**
  * Convierte un objeto fecha de javascript en formato string "yyyy-MM-dd HH:mm:ss"
@@ -47,14 +48,17 @@ export function generate_sql_update_entries(schema: any, values: any): string {
 export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivity)>(schema: any, item: any): Type {
     var casted = {} as any
     for (const prop in item) {
-        if (schema[prop] === "string") {
+        if (schema[prop] === "string" && item[prop] !== null) {
             casted[prop] = String(item[prop])
-        } else if (schema[prop] === "date") {
+        } else if (schema[prop] === "date" && item[prop] !== null) {
             casted[prop] = DateTime.fromFormat(item[prop], "yyyy-MM-dd HH:mm:ss").toJSDate()
-        } else if (schema[prop] === "boolean") {
+        } else if (schema[prop] === "boolean" && item[prop] !== null) {
             casted[prop] = Boolean(item[prop])
+        } else if (schema[prop] === "image" && item[prop] !== null) {
+            casted[prop] = `data:${casted[prop + "_type"]};base64,${item[prop].toString('base64')}`;
+        } else {
+            casted[prop] = item[prop]
         }
-        casted[prop] = item[prop]
     }
     return casted
 }
@@ -70,3 +74,20 @@ export function cast_items<Type extends (HttpResponseStudent | HttpResponseActiv
         return cast_item<Type>(schema, item)
     })
 }
+
+/**
+ * 
+ * @param filePath ruta del archivo a leer
+ * @returns una promesa que devuelve el archivo en formato Buffer
+ */
+export async function readFileAsync(filePath: string): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+      readFile(filePath, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    });
+  }
