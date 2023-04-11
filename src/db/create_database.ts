@@ -1,4 +1,4 @@
-import mysql from "mysql"
+import mysql from "mysql2"
 
 /**
  * Configuración de conexión a la base de datos
