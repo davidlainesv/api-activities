@@ -64,7 +64,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     if (req.query.id) {
         try {
-            const result = await controller.select_activity(req.query.id as string)
+            const result = await controller.select_activity(String(req.query.id))
             return res.json(result);
         } catch (error) {
             return res.status(404).json({ message: "No hemos encontrado la actividad." })
@@ -97,7 +97,7 @@ router.get('/:id', async (req, res) => {
     // ej. HTTP GET a "/activities/20"
     try {
         // 1. obtener el id que el cliente me mandó a través de la consulta
-        const requestedId = req.params.id as string
+        const requestedId = String(req.params.id)
 
         // 2. consultar la actividad con ese id en la base de datos
         const activitySelected = await controller.select_activity(requestedId)
@@ -144,7 +144,7 @@ router.put('/:id', async function (req, res) {
     }
 
     try {
-        const results = await controller.update_activity(req.params.id as string, req.body);
+        const results = await controller.update_activity(String(req.params.id), req.body);
         return res.json(results);
     } catch (error) {
         return res.status(500).json({
@@ -168,7 +168,7 @@ router.put('/:id', async function (req, res) {
  */
 router.delete('/:id', async function (req, res) {
     try {
-        controller.select_activity(req.params.id as string);
+        controller.select_activity(String(req.params.id));
     } catch (error) {
         return res.status(404).json({
             message: "No hemos encontrado la actividad.",
@@ -177,7 +177,7 @@ router.delete('/:id', async function (req, res) {
     }
 
     try {
-        const result = await controller.delete_activity(req.params.id as string);
+        const result = await controller.delete_activity(String(req.params.id));
         return res.json({ id: result });
     } catch (error) {
         console.log(error);
