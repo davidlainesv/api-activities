@@ -33,7 +33,6 @@ export async function select_activity(activity_id: string): Promise<HttpResponse
     const sql = `SELECT * FROM activities WHERE activity_id=${activity_id}`
     try {
         const results = await sendSql(sql)
-        console.log(results[0]["date_time"], String(results[0]["date_time"]), typeof results[0]["date_time"])
         return cast_item<HttpResponseActivity>(schema, results[0])
     } catch (error) {
         throw Error(error as string)
