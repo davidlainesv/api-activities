@@ -2,7 +2,7 @@ import express from 'express'
 import activities from './endpoints/activities/router'
 import students from './endpoints/students/router'
 
-const PORT = 3000
+const PORT = 8080
 
 const app = express()
 
