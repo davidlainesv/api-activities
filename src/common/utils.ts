@@ -51,7 +51,8 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
         if (schema[prop] === "string" && item[prop] !== null) {
             casted[prop] = String(item[prop])
         } else if (schema[prop] === "date" && item[prop] !== null) {
-            casted[prop] = DateTime.fromFormat(item[prop], "yyyy-MM-dd HH:mm:ss").toJSDate()
+            // 2023-04-11T16:58:19.000Z
+            casted[prop] = DateTime.fromFormat(item[prop], "yyyy-MM-ddTHH:mm:ss").toJSDate()
         } else if (schema[prop] === "boolean" && item[prop] !== null) {
             casted[prop] = Boolean(item[prop])
         } else if (schema[prop] === "image" && item[prop] !== null) {
