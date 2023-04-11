@@ -3,7 +3,7 @@
  */
 export const schema = {
     "description": "string",
-    "date_time": "string",
+    "date_time": "object",
     "category": "string",
     "priority": "boolean",
     "student_id": "string"
