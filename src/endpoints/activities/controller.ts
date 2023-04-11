@@ -1,7 +1,6 @@
 import { cast_item, cast_items, generate_sql_update_entries } from "../../common/utils"
 import { sendSql } from "../../db/pool"
-import { HttpRequestActivity, HttpRequestActivityUpdate, schema } from "./model"
-import { HttpResponseActivity } from "./model"
+import { HttpRequestActivity, HttpRequestActivityUpdate, HttpResponseActivity, schema } from "./model"
 
 /**
  * Actualiza una actividad en la base de datos

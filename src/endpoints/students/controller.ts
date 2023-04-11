@@ -1,7 +1,6 @@
 import { cast_item, cast_items, generate_sql_update_entries } from "../../common/utils"
 import { sendSql } from "../../db/pool"
-import { HttpRequestStudentCreateJson, HttpRequestStudentUpdateJson, schema } from "./model"
-import { HttpResponseStudent } from "./model"
+import { HttpRequestStudentCreateJson, HttpRequestStudentUpdateJson, HttpResponseStudent, schema } from "./model"
 
 
 export async function insert_picture(student_id: string, _imageName: string, _imageType: string, imageData: Buffer) {
