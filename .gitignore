@@ -105,3 +105,6 @@ dist
 
 # Uploads
 uploads/
+
+# Build
+build/
