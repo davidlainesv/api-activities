@@ -52,6 +52,7 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
             casted[prop] = String(item[prop])
         } else if (schema[prop] === "date" && item[prop] !== null) {
             if (typeof (item[prop]) === "string") {
+                console.log("entre aqui??")
                 const datetime = DateTime.fromSQL(item[prop]);
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
             } else {
