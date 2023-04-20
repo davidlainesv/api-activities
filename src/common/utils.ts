@@ -58,6 +58,7 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
                 console.log("entre aqui")
                 const datetime = DateTime.fromJSDate(item[prop]);
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
+                console.log("prop", casted[prop])
             }
             casted[prop] = DateTime.fromFormat(item[prop], "yyyy-MM-ddTHH:mm:ss").toJSDate()
         } else if (schema[prop] === "boolean" && item[prop] !== null) {
