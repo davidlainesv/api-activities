@@ -1,3 +1,4 @@
+import { DateTime } from "luxon"
 import { cast_item, cast_items, generate_sql_update_entries } from "../../common/utils"
 import { sendSql } from "../../db/pool"
 import { HttpRequestActivity, HttpRequestActivityUpdate, HttpResponseActivity, schema } from "./model"
@@ -59,12 +60,13 @@ export async function select_activities(): Promise<HttpResponseActivity[]> {
  */
 export async function insert_activity(activity: HttpRequestActivity) {
     const priority_bit = + activity.priority
+    const activity_date_time = DateTime.fromISO(activity.date_time).toFormat("yyyy-MM-dd HH:mm:ss")
     const sql = `
         INSERT INTO activities (description, date_time, category, priority, student_id)
-        VALUES ('${activity.description}', '${activity.date_time}', '${activity.category}', ${priority_bit}, '${activity.student_id}')
+        VALUES ('${activity.description}', '${activity_date_time}', '${activity.category}', ${priority_bit}, '${activity.student_id}')
     `;
     try {
-        const result = await sendSql(sql)
+        const result = await sendSql(sql, )
         return cast_item<HttpResponseActivity>(schema, result)
     } catch (error) {
         throw Error(error as string)
