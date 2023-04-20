@@ -52,14 +52,11 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
             casted[prop] = String(item[prop])
         } else if (schema[prop] === "date" && item[prop] !== null) {
             if (typeof (item[prop]) === "string") {
-                console.log("entre aqui??")
                 const datetime = DateTime.fromSQL(item[prop]);
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
             } else {
-                console.log("entre aqui")
                 const datetime = DateTime.fromJSDate(item[prop]);
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
-                console.log("prop", casted[prop])
             }
         } else if (schema[prop] === "boolean" && item[prop] !== null) {
             casted[prop] = Boolean(item[prop])
