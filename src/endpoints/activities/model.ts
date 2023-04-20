@@ -3,7 +3,7 @@
  */
 export const schema = {
     "description": "string",
-    "date_time": "object",
+    "date_time": "date",
     "category": "string",
     "priority": "boolean",
     "student_id": "string"
@@ -15,7 +15,7 @@ export const schema = {
 export interface HttpResponseActivity {
     activity_id: number
     description: string
-    date_time: Date
+    date_time: string
     category: string
     priority: boolean
     student_id: string

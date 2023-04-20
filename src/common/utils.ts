@@ -51,7 +51,13 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
         if (schema[prop] === "string" && item[prop] !== null) {
             casted[prop] = String(item[prop])
         } else if (schema[prop] === "date" && item[prop] !== null) {
-            // 2023-04-11T16:58:19.000Z
+            if (typeof (item[prop]) === "string") {
+                const datetime = DateTime.fromSQL(item[prop]);
+                casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
+            } else {
+                const datetime = DateTime.fromJSDate(item[prop]);
+                casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
+            }
             casted[prop] = DateTime.fromFormat(item[prop], "yyyy-MM-ddTHH:mm:ss").toJSDate()
         } else if (schema[prop] === "boolean" && item[prop] !== null) {
             casted[prop] = Boolean(item[prop])
@@ -83,12 +89,12 @@ export function cast_items<Type extends (HttpResponseStudent | HttpResponseActiv
  */
 export async function readFileAsync(filePath: string): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
-      readFile(filePath, (err, data) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      });
+        readFile(filePath, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
     });
-  }
+}
