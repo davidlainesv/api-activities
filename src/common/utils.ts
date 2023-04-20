@@ -55,6 +55,7 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
                 const datetime = DateTime.fromSQL(item[prop]);
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
             } else {
+                console.log("entre aqui")
                 const datetime = DateTime.fromJSDate(item[prop]);
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
             }
