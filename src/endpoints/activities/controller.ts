@@ -34,8 +34,10 @@ export async function select_activity(activity_id: string): Promise<HttpResponse
     try {
         const results = await sendSql(sql)
         console.log("LOG DEVUELTO POR LA BASE DE DATOS", results[0])
-        console.log("LOG DEVUELTO POR LA BASE DE DATOS", typeof(results[0].date_time))
-        return cast_item<HttpResponseActivity>(schema, results[0])
+        console.log("LOG DEVUELTO POR LA BASE DE DATOS", typeof (results[0].date_time))
+        const casted = cast_item<HttpResponseActivity>(schema, results[0])
+        console.log("casted!!")
+        return casted
     } catch (error) {
         throw Error(error as string)
     }
@@ -68,7 +70,7 @@ export async function insert_activity(activity: HttpRequestActivity) {
         VALUES ('${activity.description}', '${activity_date_time}', '${activity.category}', ${priority_bit}, '${activity.student_id}')
     `;
     try {
-        const result = await sendSql(sql, )
+        const result = await sendSql(sql,)
         return cast_item<HttpResponseActivity>(schema, result)
     } catch (error) {
         throw Error(error as string)
