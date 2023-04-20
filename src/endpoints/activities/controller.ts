@@ -34,6 +34,7 @@ export async function select_activity(activity_id: string): Promise<HttpResponse
     try {
         const results = await sendSql(sql)
         console.log("LOG DEVUELTO POR LA BASE DE DATOS", results[0])
+        console.log("LOG DEVUELTO POR LA BASE DE DATOS", typeof(results[0].date_time))
         return cast_item<HttpResponseActivity>(schema, results[0])
     } catch (error) {
         throw Error(error as string)
