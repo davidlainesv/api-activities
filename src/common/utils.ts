@@ -61,7 +61,6 @@ export function cast_item<Type extends (HttpResponseStudent | HttpResponseActivi
                 casted[prop] = datetime.toUTC().toISO({ suppressMilliseconds: true })
                 console.log("prop", casted[prop])
             }
-            casted[prop] = DateTime.fromFormat(item[prop], "yyyy-MM-ddTHH:mm:ss").toJSDate()
         } else if (schema[prop] === "boolean" && item[prop] !== null) {
             casted[prop] = Boolean(item[prop])
         } else if (schema[prop] === "image" && item[prop] !== null) {
